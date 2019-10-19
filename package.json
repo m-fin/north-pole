@@ -1,0 +1,21 @@
+{
+    "name": "north-pole",
+    "displayName": "North Pole",
+    "description": "Color environment to get you in the Christmas spirit.",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.39.0"
+    },
+    "categories": [
+        "Themes"
+    ],
+    "contributes": {
+        "themes": [
+            {
+                "label": "North Pole",
+                "uiTheme": "vs-dark",
+                "path": "./themes/North Pole-color-theme.json"
+            }
+        ]
+    }
+}

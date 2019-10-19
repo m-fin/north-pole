@@ -2,10 +2,10 @@
     "name": "north-pole",
     "displayName": "North Pole",
     "description": "A dark VS Code theme to get you in the holiday spirit.",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "publisher": "m-fin",
     "repository": "https://github.com/m-fin/north-pole",
-    "icon": "./icon.png",
+    "icon": "icon.png",
     "engines": {
         "vscode": "^1.39.0"
     },

@@ -5,7 +5,7 @@
     "version": "0.0.5",
     "publisher": "m-fin",
     "repository": "https://github.com/m-fin/north-pole",
-    "icon": "icon.png",
+    "icon": "./img/icon.png",
     "engines": {
         "vscode": "^1.39.0"
     },

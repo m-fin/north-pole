@@ -1,5 +1,6 @@
 {
-    "name": "Generated",
+    "name": "North Pole",
+    "type": "dark",
     "tokenColors": [
         {
             "name": "Global settings",

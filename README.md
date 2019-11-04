@@ -1,6 +1,6 @@
 # North Pole
 
-A dark VS Code theme to get you in the holiday spirit.
+A Christmas VS Code dark theme to get you in the holiday spirit.
 
 Feel free to make suggestions or submit a pull request, this is a work in progress and I plan on making more refinements.
 

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="North Pole mark: a pine, a candle star, and a striped pole">
+  <rect width="128" height="128" rx="28" fill="#101816"/>
+  <ellipse cx="48" cy="30" rx="44" ry="22" fill="#1fa971" opacity="0.28"/>
+  <ellipse cx="82" cy="44" rx="28" ry="14" fill="#3ddc97" opacity="0.16"/>
+  <path d="M0 104c16-12 30 8 48 0s32 8 48-4 22 8 32 2v26H0Z" fill="#c5ddd2"/>
+  <path d="M0 110c18-8 32 6 50-1s30 8 46-2 22 6 32 1v20H0Z" fill="#e7f6ef"/>
+  <rect x="40" y="84" width="8" height="20" rx="1" fill="#143028"/>
+  <polygon points="14,88 74,88 44,60" fill="#178a5a"/>
+  <polygon points="20,68 68,68 44,44" fill="#1fa971"/>
+  <polygon points="26,50 62,50 44,30" fill="#3ddc97"/>
+  <polygon points="44.00,13.50 46.06,19.17 52.08,19.37 47.33,23.08 49.00,28.88 44.00,25.50 39.00,28.88 40.67,23.08 35.92,19.37 41.94,19.17" fill="#d9a441"/>
+  <rect x="88" y="38" width="10" height="68" fill="#b4233a"/>
+  <rect x="88" y="38" width="10" height="10" fill="#fff6f7"/>
+  <rect x="88" y="58" width="10" height="10" fill="#fff6f7"/>
+  <rect x="88" y="78" width="10" height="10" fill="#fff6f7"/>
+  <circle cx="93" cy="33" r="6.5" fill="#d9a441"/>
+  <circle cx="93" cy="33" r="2.4" fill="#fff6f7"/>
+</svg>

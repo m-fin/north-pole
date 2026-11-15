@@ -1,33 +1,54 @@
 {
-    "name": "north-pole",
-    "displayName": "North Pole",
-    "description": "A dark VS Code theme to get you in the holiday spirit.",
-    "version": "0.0.6",
-    "publisher": "m-fin",
-    "repository": "https://github.com/m-fin/north-pole",
-    "icon": "img/icon.png",
-    "engines": {
-        "vscode": "^1.39.0"
-    },
-    "categories": [
-        "Themes"
-    ],
-    "keywords": [
-        "christmas",
-        "holiday",
-        "xmas",
-        "x-mas",
-        "santa",
-        "north pole",
-        "theme"
-    ],
-    "contributes": {
-        "themes": [
-            {
-                "label": "North Pole",
-                "uiTheme": "vs-dark",
-                "path": "./themes/North Pole-color-theme.json"
-            }
-        ]
-    }
+  "name": "north-pole",
+  "displayName": "North Pole",
+  "description": "A dark holiday theme for VS Code — polar night, holly, evergreen, candlelight, and snow.",
+  "version": "1.0.0",
+  "publisher": "m-fin",
+  "author": "Matthew Finley",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/m-fin/north-pole"
+  },
+  "homepage": "https://m-fin.github.io/north-pole/",
+  "bugs": {
+    "url": "https://github.com/m-fin/north-pole/issues"
+  },
+  "qna": "https://github.com/m-fin/north-pole/issues",
+  "icon": "img/icon.png",
+  "galleryBanner": {
+    "color": "#101816",
+    "theme": "dark"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "keywords": [
+    "christmas",
+    "holiday",
+    "xmas",
+    "north pole",
+    "theme",
+    "dark"
+  ],
+  "scripts": {
+    "test": "node scripts/validate-theme.mjs",
+    "package": "mkdir -p dist && vsce package --out dist/north-pole.vsix",
+    "preview": "python3 -m http.server 4173 --directory site"
+  },
+  "devDependencies": {
+    "@vscode/vsce": "^4.1.1"
+  },
+  "contributes": {
+    "themes": [
+      {
+        "label": "North Pole",
+        "uiTheme": "vs-dark",
+        "path": "./themes/north-pole-color-theme.json"
+      }
+    ]
+  }
 }

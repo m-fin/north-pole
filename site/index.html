@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>North Pole — a dark holiday theme for VS Code</title>
+  <meta name="description" content="North Pole is a dark Visual Studio Code theme: polar night, holly, evergreen, candle gold, and snow.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <style>
+    :root {
+      --night: #101816;
+      --deeper: #070c0a;
+      --ink: #0b110f;
+      --side: #0d1412;
+      --raised: #17211d;
+      --line: #1c2924;
+      --snow: #e7f6ef;
+      --spruce: #8eaa9c;
+      --holly: #ff6b81;
+      --pine: #5ee0a0;
+      --candle: #d9a441;
+      --mint: #7dffc3;
+      --warm: #fff4d8;
+      --ice: #9fd4e0;
+      --mist: #9fb8ac;
+      --berry: #b4233a;
+      --paper: #fff6f7;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--snow);
+      background:
+        radial-gradient(900px 420px at 12% -10%, rgba(31, 169, 113, 0.28), transparent 60%),
+        radial-gradient(700px 380px at 100% 0%, rgba(180, 35, 58, 0.18), transparent 55%),
+        var(--deeper);
+      font-family: "Segoe UI", "Avenir Next", "Trebuchet MS", sans-serif;
+      line-height: 1.5;
+    }
+    body::before {
+      content: "";
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(1.5px 1.5px at 20px 30px, rgba(231, 246, 239, 0.45), transparent),
+        radial-gradient(1.5px 1.5px at 80px 120px, rgba(231, 246, 239, 0.3), transparent),
+        radial-gradient(1px 1px at 140px 70px, rgba(231, 246, 239, 0.35), transparent);
+      background-size: 180px 160px;
+      animation: drift 22s linear infinite;
+      opacity: 0.45;
+    }
+    @keyframes drift {
+      from { transform: translateY(0); }
+      to { transform: translateY(160px); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      body::before { animation: none; }
+      .cursor { animation: none !important; }
+    }
+
+    a { color: var(--ice); }
+    a:hover { color: #d5f4ff; }
+    :focus-visible {
+      outline: 2px solid var(--candle);
+      outline-offset: 3px;
+    }
+
+    .wrap {
+      position: relative;
+      width: min(1080px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 36px 0 64px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    header img {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      flex: none;
+    }
+    .wordmark {
+      font-family: Georgia, "Iowan Old Style", Palatino, "Palatino Linotype", serif;
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      line-height: 0.95;
+      margin: 0;
+      letter-spacing: -0.02em;
+    }
+    .lede {
+      margin: 6px 0 0;
+      color: var(--spruce);
+      max-width: 46rem;
+    }
+
+    .window {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+      background: var(--night);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+    }
+    .titlebar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      height: 38px;
+      padding: 0 14px;
+      background: var(--ink);
+      border-bottom: 1px solid var(--line);
+      border-top: 2px solid var(--holly);
+      color: var(--spruce);
+      font-size: 12px;
+    }
+    .dots { display: flex; gap: 6px; margin-right: 8px; }
+    .dots i {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: block;
+    }
+    .dots i:nth-child(1) { background: #ff6b81; }
+    .dots i:nth-child(2) { background: #d9a441; }
+    .dots i:nth-child(3) { background: #5ee0a0; }
+    .title-file { color: var(--snow); }
+
+    .workbench {
+      display: grid;
+      grid-template-columns: 52px 210px minmax(0, 1fr);
+      min-height: 460px;
+    }
+    .activity {
+      background: var(--ink);
+      border-right: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 0;
+    }
+    .activity button {
+      width: 36px;
+      height: 36px;
+      border: 0;
+      border-radius: 8px;
+      background: transparent;
+      color: var(--spruce);
+      display: grid;
+      place-items: center;
+      cursor: default;
+    }
+    .activity button[aria-pressed="true"] {
+      color: var(--snow);
+      background: rgba(255, 107, 129, 0.12);
+      box-shadow: inset 2px 0 0 var(--holly);
+    }
+    .sidebar {
+      background: var(--side);
+      border-right: 1px solid var(--line);
+      padding: 14px 10px;
+    }
+    .side-label {
+      margin: 0 8px 8px;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      color: var(--spruce);
+    }
+    .file {
+      width: 100%;
+      text-align: left;
+      border: 0;
+      background: transparent;
+      color: var(--spruce);
+      font: inherit;
+      font-size: 13px;
+      border-radius: 6px;
+      padding: 6px 8px;
+      cursor: pointer;
+    }
+    .file[aria-current="true"] {
+      background: rgba(255, 107, 129, 0.16);
+      color: white;
+    }
+    .editor { display: flex; flex-direction: column; min-width: 0; }
+    .tabs {
+      display: flex;
+      gap: 0;
+      background: var(--side);
+      border-bottom: 1px solid var(--line);
+    }
+    .tabs button {
+      border: 0;
+      background: var(--side);
+      color: var(--spruce);
+      font: inherit;
+      font-size: 13px;
+      padding: 9px 16px;
+      cursor: pointer;
+    }
+    .tabs button[aria-selected="true"] {
+      background: var(--night);
+      color: white;
+      box-shadow: inset 0 2px 0 var(--holly);
+    }
+    .code {
+      margin: 0;
+      padding: 14px 0 18px;
+      overflow: auto;
+      font-family: "Cascadia Code", "SFMono-Regular", ui-monospace, Menlo, Consolas, monospace;
+      font-size: 13.5px;
+      line-height: 1.6;
+      flex: 1;
+    }
+    .line { display: block; min-height: 1.6em; padding-right: 16px; white-space: pre; }
+    .line.active { background: rgba(231, 246, 239, 0.05); }
+    .ln {
+      display: inline-block;
+      width: 46px;
+      text-align: right;
+      padding-right: 16px;
+      color: #7d9a8c;
+      user-select: none;
+    }
+    .c { color: #8eaa9c; font-style: italic; }
+    .k { color: #ff6b81; }
+    .s { color: #5ee0a0; }
+    .n { color: #d9a441; }
+    .f { color: #fff4d8; }
+    .t { color: #7dffc3; }
+    .v { color: #d5eee4; }
+    .p { color: #f6d98a; }
+    .r { color: #a9d4c4; }
+    .m { color: #9fb8ac; }
+    .cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.05em;
+      background: #d9a441;
+      margin-left: 1px;
+      vertical-align: text-bottom;
+      animation: blink 1.1s steps(1) infinite;
+    }
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+    .statusbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 4px 12px;
+      background: var(--ink);
+      border-top: 1px solid var(--line);
+      color: #d5eee4;
+      font-size: 12px;
+    }
+    .statusbar span { display: inline-flex; align-items: center; gap: 6px; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 22px;
+      margin-top: 28px;
+    }
+    section {
+      background: rgba(16, 24, 22, 0.78);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 18px 18px 8px;
+    }
+    h2 {
+      font-family: Georgia, "Iowan Old Style", Palatino, serif;
+      font-size: 1.35rem;
+      font-weight: normal;
+      margin: 0 0 12px;
+    }
+    .swatches {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .swatches li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .chip {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      flex: none;
+      border: 1px solid rgba(231, 246, 239, 0.16);
+    }
+    .swatches strong { display: block; font-size: 14px; }
+    .swatches em { font-style: normal; color: var(--spruce); font-size: 12px; }
+
+    .install {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      background: var(--ink);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 8px 8px 8px 12px;
+      margin-bottom: 12px;
+    }
+    .install code {
+      flex: 1;
+      font-family: ui-monospace, Menlo, Consolas, monospace;
+      color: var(--pine);
+      font-size: 13px;
+    }
+    button.copy {
+      border: 0;
+      background: var(--berry);
+      color: var(--paper);
+      font: inherit;
+      font-size: 13px;
+      border-radius: 8px;
+      padding: 7px 12px;
+      cursor: pointer;
+    }
+    button.copy:hover { background: #9d2438; }
+    button.copy[data-state="copied"] { background: #1fa971; color: #042117; }
+    .note { color: var(--spruce); font-size: 14px; margin-top: 0; }
+
+    footer {
+      margin-top: 26px;
+      color: var(--spruce);
+      font-size: 14px;
+    }
+
+    @media (max-width: 800px) {
+      .workbench { grid-template-columns: minmax(0, 1fr); }
+      .activity, .sidebar { display: none; }
+      .grid { grid-template-columns: 1fr; }
+      .swatches { grid-template-columns: 1fr; }
+      .wrap { width: min(1080px, calc(100% - 20px)); }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <img src="favicon.svg" width="56" height="56" alt="">
+      <div>
+        <h1 class="wordmark">North Pole</h1>
+        <p class="lede">A dark holiday theme for Visual Studio Code. Polar night, holly, evergreen, candlelight, and snow — drawn for this project, not borrowed from anybody's characters.</p>
+      </div>
+    </header>
+
+    <div class="window">
+      <div class="titlebar">
+        <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span>North Pole — <span class="title-file" id="title-file">light-window.ts</span></span>
+      </div>
+      <div class="workbench">
+        <nav class="activity" aria-label="Activity bar">
+          <button type="button" aria-pressed="true" aria-label="Explorer" title="Explorer">
+            <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path fill="currentColor" d="M2 3.5h5l1.2 1.5H16v9H2v-10.5z"/></svg>
+          </button>
+          <button type="button" aria-pressed="false" aria-label="Search" title="Search">
+            <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="8" cy="8" r="4.2" fill="none" stroke="currentColor" stroke-width="1.6"/><path stroke="currentColor" stroke-width="1.6" d="M11.2 11.2 15 15"/></svg>
+          </button>
+          <button type="button" aria-pressed="false" aria-label="Source control" title="Source control">
+            <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="5" cy="4" r="1.7" fill="currentColor"/><circle cx="5" cy="14" r="1.7" fill="currentColor"/><circle cx="13" cy="9" r="1.7" fill="currentColor"/><path stroke="currentColor" stroke-width="1.4" d="M5 5.8v6.4M5 9h6.2"/></svg>
+          </button>
+          <button type="button" aria-pressed="false" aria-label="Run" title="Run">
+            <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path fill="currentColor" d="M6 4.2 14 9 6 13.8z"/></svg>
+          </button>
+        </nav>
+        <aside class="sidebar">
+          <p class="side-label">EXPLORER</p>
+          <button class="file" type="button" data-open="ts" aria-current="true">light-window.ts</button>
+          <button class="file" type="button" data-open="json" aria-current="false">palette.json</button>
+          <button class="file" type="button" data-open="md" aria-current="false">greeting.md</button>
+        </aside>
+        <div class="editor">
+          <div class="tabs" role="tablist" aria-label="Open editors">
+            <button type="button" role="tab" id="tab-ts" data-open="ts" aria-selected="true" aria-controls="pane-ts">light-window.ts</button>
+            <button type="button" role="tab" id="tab-json" data-open="json" aria-selected="false" aria-controls="pane-json">palette.json</button>
+            <button type="button" role="tab" id="tab-md" data-open="md" aria-selected="false" aria-controls="pane-md">greeting.md</button>
+          </div>
+          <div id="pane-ts" role="tabpanel" aria-labelledby="tab-ts" data-pane="ts">
+            <pre class="code"><div class="line"><span class="ln">1</span><span class="k">type</span> <span class="t">Ornament</span> <span class="m">=</span> <span class="s">"berry"</span> <span class="m">|</span> <span class="s">"pine"</span> <span class="m">|</span> <span class="s">"gold"</span><span class="m">;</span></div><div class="line"><span class="ln">2</span></div><div class="line"><span class="ln">3</span><span class="c">/** Lights one window on a polar night. */</span></div><div class="line active"><span class="ln">4</span><span class="k">export function</span> <span class="f">lightWindow</span><span class="m">(</span><span class="p">ornaments</span><span class="m">:</span> <span class="t">Ornament</span><span class="m">[]):</span> <span class="t">string</span> <span class="m">{</span><span class="cursor" aria-hidden="true"></span></div><div class="line"><span class="ln">5</span>  <span class="k">const</span> <span class="v">glow</span> <span class="m">=</span> <span class="v">ornaments</span><span class="m">.</span><span class="f">map</span><span class="m">((</span><span class="p">kind</span><span class="m">)</span> <span class="m">=&gt;</span> <span class="m">{</span></div><div class="line"><span class="ln">6</span>    <span class="k">if</span> <span class="m">(</span><span class="v">kind</span> <span class="m">===</span> <span class="s">"gold"</span><span class="m">)</span> <span class="m">{</span></div><div class="line"><span class="ln">7</span>      <span class="k">return</span> <span class="s">"candle"</span><span class="m">;</span></div><div class="line"><span class="ln">8</span>    <span class="m">}</span></div><div class="line"><span class="ln">9</span>    <span class="k">return</span> <span class="v">kind</span> <span class="m">===</span> <span class="s">"pine"</span> <span class="m">?</span> <span class="s">"evergreen"</span> <span class="m">:</span> <span class="s">"holly"</span><span class="m">;</span></div><div class="line"><span class="ln">10</span>  <span class="m">});</span></div><div class="line"><span class="ln">11</span></div><div class="line"><span class="ln">12</span>  <span class="k">return</span> <span class="s">`North Pole · </span><span class="k">${</span><span class="v">glow</span><span class="m">.</span><span class="f">join</span><span class="m">(</span><span class="s">" · "</span><span class="m">)</span><span class="k">}</span><span class="s">`</span><span class="m">;</span></div><div class="line"><span class="ln">13</span><span class="m">}</span></div><div class="line"><span class="ln">14</span></div><div class="line"><span class="ln">15</span><span class="k">const</span> <span class="v">greeting</span> <span class="m">=</span> <span class="f">lightWindow</span><span class="m">([</span><span class="s">"pine"</span><span class="m">,</span> <span class="s">"gold"</span><span class="m">,</span> <span class="s">"berry"</span><span class="m">]);</span></div><div class="line"><span class="ln">16</span><span class="v">console</span><span class="m">.</span><span class="f">log</span><span class="m">(</span><span class="v">greeting</span><span class="m">);</span></div></pre>
+          </div>
+          <div id="pane-json" role="tabpanel" aria-labelledby="tab-json" data-pane="json" hidden>
+            <pre class="code"><div class="line"><span class="ln">1</span><span class="m">{</span></div><div class="line"><span class="ln">2</span>  <span class="r">"name"</span><span class="m">:</span> <span class="s">"North Pole"</span><span class="m">,</span></div><div class="line"><span class="ln">3</span>  <span class="r">"night"</span><span class="m">:</span> <span class="s">"#101816"</span><span class="m">,</span></div><div class="line"><span class="ln">4</span>  <span class="r">"holly"</span><span class="m">:</span> <span class="s">"#ff6b81"</span><span class="m">,</span></div><div class="line"><span class="ln">5</span>  <span class="r">"pine"</span><span class="m">:</span> <span class="s">"#5ee0a0"</span><span class="m">,</span></div><div class="line active"><span class="ln">6</span>  <span class="r">"candle"</span><span class="m">:</span> <span class="s">"#d9a441"</span><span class="cursor" aria-hidden="true"></span><span class="m">,</span></div><div class="line"><span class="ln">7</span>  <span class="r">"snow"</span><span class="m">:</span> <span class="s">"#e7f6ef"</span></div><div class="line"><span class="ln">8</span><span class="m">}</span></div></pre>
+          </div>
+          <div id="pane-md" role="tabpanel" aria-labelledby="tab-md" data-pane="md" hidden>
+            <pre class="code"><div class="line"><span class="ln">1</span><span class="k"># North Pole</span></div><div class="line"><span class="ln">2</span></div><div class="line"><span class="ln">3</span><span class="v">A dark theme for polar nights.</span></div><div class="line"><span class="ln">4</span></div><div class="line"><span class="ln">5</span><span class="m">-</span> <span class="f">**Holly**</span> <span class="v">marks the words that steer</span></div><div class="line"><span class="ln">6</span><span class="m">-</span> <span class="s">**Pine**</span> <span class="v">marks the words you wrote</span></div><div class="line"><span class="ln">7</span><span class="m">-</span> <span class="n">**Candle**</span> <span class="v">marks the counts</span></div><div class="line"><span class="ln">8</span></div><div class="line active"><span class="ln">9</span><span class="s">`lightWindow(["pine", "gold"])`</span><span class="cursor" aria-hidden="true"></span></div></pre>
+          </div>
+          <div class="statusbar">
+            <span>North Pole</span>
+            <span><span id="status-lang">TypeScript</span> · UTF-8</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <section aria-labelledby="palette-heading">
+        <h2 id="palette-heading">Palette</h2>
+        <ul class="swatches">
+          <li><span class="chip" style="background:#101816"></span><span><strong>Polar night</strong><em>#101816 · background</em></span></li>
+          <li><span class="chip" style="background:#e7f6ef"></span><span><strong>Snow</strong><em>#e7f6ef · text</em></span></li>
+          <li><span class="chip" style="background:#8eaa9c"></span><span><strong>Spruce</strong><em>#8eaa9c · comments</em></span></li>
+          <li><span class="chip" style="background:#ff6b81"></span><span><strong>Holly</strong><em>#ff6b81 · keywords</em></span></li>
+          <li><span class="chip" style="background:#5ee0a0"></span><span><strong>Evergreen</strong><em>#5ee0a0 · strings</em></span></li>
+          <li><span class="chip" style="background:#d9a441"></span><span><strong>Candle</strong><em>#d9a441 · numbers</em></span></li>
+          <li><span class="chip" style="background:#7dffc3"></span><span><strong>Mint</strong><em>#7dffc3 · types</em></span></li>
+          <li><span class="chip" style="background:#fff4d8"></span><span><strong>Warm snow</strong><em>#fff4d8 · functions</em></span></li>
+        </ul>
+      </section>
+      <section aria-labelledby="install-heading">
+        <h2 id="install-heading">Install</h2>
+        <div class="install">
+          <code id="install-command">ext install m-fin.north-pole</code>
+          <button class="copy" type="button" id="copy-install">Copy</button>
+        </div>
+        <p class="note">In this repo, <code>npm test</code> checks contrast and <code>npm run package</code> builds <code>dist/north-pole.vsix</code>. Press F5 in VS Code and pick the North Pole color theme.</p>
+      </section>
+    </div>
+
+    <footer>
+      <p>MIT License © 2026 Matthew Finley. Ready for the 2026 holidays. <a href="https://github.com/m-fin/north-pole">Source on GitHub</a>.</p>
+    </footer>
+  </div>
+  <script>
+    const titles = {
+      ts: ["light-window.ts", "TypeScript"],
+      json: ["palette.json", "JSON"],
+      md: ["greeting.md", "Markdown"]
+    };
+
+    function show(id) {
+      document.querySelectorAll("[data-pane]").forEach((pane) => {
+        pane.hidden = pane.dataset.pane !== id;
+      });
+      document.querySelectorAll("[data-open]").forEach((control) => {
+        const on = control.dataset.open === id;
+        if (control.getAttribute("role") === "tab") {
+          control.setAttribute("aria-selected", on ? "true" : "false");
+        }
+        if (control.classList.contains("file")) {
+          control.setAttribute("aria-current", on ? "true" : "false");
+        }
+      });
+      document.getElementById("title-file").textContent = titles[id][0];
+      document.getElementById("status-lang").textContent = titles[id][1];
+    }
+
+    document.querySelectorAll("[data-open]").forEach((control) => {
+      control.addEventListener("click", () => show(control.dataset.open));
+    });
+
+    const copyButton = document.getElementById("copy-install");
+    copyButton.addEventListener("click", async () => {
+      const command = document.getElementById("install-command").textContent;
+      try {
+        await navigator.clipboard.writeText(command);
+      } catch (error) {
+        const area = document.createElement("textarea");
+        area.value = command;
+        document.body.appendChild(area);
+        area.select();
+        document.execCommand("copy");
+        area.remove();
+      }
+      copyButton.dataset.state = "copied";
+      copyButton.textContent = "Copied";
+      setTimeout(() => {
+        copyButton.dataset.state = "";
+        copyButton.textContent = "Copy";
+      }, 1600);
+    });
+  </script>
+</body>
+</html>

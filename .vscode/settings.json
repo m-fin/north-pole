@@ -1,3 +1,4 @@
 {
-    "git.ignoreLimitWarning": true
+  "editor.semanticHighlighting.enabled": true,
+  "editor.bracketPairColorization.enabled": true
 }
